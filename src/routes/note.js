@@ -1,4 +1,9 @@
 const {Router} = require("express");
 const noteRouter = Router();
 
-noteRouter.get("/notes/:user_id", ) //fetch user notes
+const {addNote, deleteNote} = require("../controllers/note")
+
+noteRouter.post("/notes/:user_id", addNote) //fetch user notes
+noteRouter.delete("/notes/:user_id", deleteNote)
+
+module.exports = {noteRouter};
