@@ -17,7 +17,7 @@ exports.addNote = async (req, res) => {
 
 exports.deleteNote = async (req, res) => {
     try {
-        const note = await Note.findByIdAndDelete(req.params.user_id);
+        const note = await Note.findByIdAndDelete(req.params.note_id);
         res.status(200).send(note);
     } catch (error) {
         console.log(error)
