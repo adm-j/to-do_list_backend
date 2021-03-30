@@ -15,6 +15,10 @@ exports.auth = async (req, res, next) => {
         const decode = jwt.verify(token, process.env.SECRET);
         const user = await User.findOne({_id: decode.id, "tokens.token": token});
 
+        if (!user) {
+            throw new Error();
+        }
+
         req.user = user;
         req.token = token;
 

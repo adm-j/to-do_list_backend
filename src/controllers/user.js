@@ -4,7 +4,7 @@ const {User} = require("../models/User");
 exports.addUser = async (req, res) => {
     try {
         const user = new User(req.body);
-        // const token = await user.generateAuthToken();
+        const token = await user.generateAuthToken();
         const savedUser = await user.save();
         const username = savedUser.username
         console.log(username)
@@ -28,13 +28,13 @@ exports.addUser = async (req, res) => {
 exports.login = async (req, res) => {
     try{
         const user = await User.findByCredentials(req.body.username, req.body.password);
-        const token = user.generateAuthToken();
+        const token = await user.generateAuthToken();
         
         const userName = user.username
-        const userToken = user.tokens[0]
+        // const userToken = user.tokens[0]
 
         console.log("successful login");
-        res.status(200).send({userName, userToken});
+        res.status(200).send({userName, token});
     } catch (error) {
         console.log(error);
         res.status(400).send({message: "unable to login"});
@@ -54,3 +54,8 @@ exports.logout = async (req, res) => {
         res.status(500).send({message: "unable to log out"});
     }
 };
+
+exports.fetchUser = async (req, res) => {
+
+    res.status(200).send(req);
+}
