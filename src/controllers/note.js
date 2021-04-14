@@ -25,3 +25,13 @@ exports.deleteNote = async (req, res) => {
         
     }
 }
+
+exports.getNotes = async (req, res) => {
+    try {
+        const userNotes = await Note.find({author: req.params.user_id});
+        res.status(200).send(userNotes);        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({message: "no notes found"});
+    }
+}
