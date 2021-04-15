@@ -32,6 +32,7 @@ exports.getNotes = async (req, res) => {
         res.status(200).send(userNotes);        
     } catch (error) {
         console.log(error);
+        console.log(req.params)
         res.status(500).send({message: "no notes found"});
     }
 }

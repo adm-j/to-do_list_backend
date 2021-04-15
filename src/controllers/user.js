@@ -31,10 +31,12 @@ exports.login = async (req, res) => {
         const token = await user.generateAuthToken();
         
         const userName = user.username
+        const userID = user._id;
+        console.log(user._id);
         // const userToken = user.tokens[0]
 
         console.log("successful login");
-        res.status(200).send({userName, token});
+        res.status(200).send({userName, userID});
     } catch (error) {
         console.log(error);
         res.status(400).send({message: "unable to login"});
